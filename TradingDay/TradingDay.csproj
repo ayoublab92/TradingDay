@@ -1,6 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
   <PropertyGroup>
     <TargetFramework>netcoreapp2.0</TargetFramework>
+    <CustomProp>Tessan</CustomProp>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.9" />
@@ -8,4 +9,30 @@
   <ItemGroup>
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.4" />
   </ItemGroup>
+  
+  <Target Name="CopyTestData" AfterTargets="Build">
+    <Copy SourceFiles="TestData.txt" DestinationFolder="$(OutputPath)"/>
+  </Target>
+
+  <Target Name="BuildAll" DependsOnTargets="Clean;Build;Test;StaticAnalysis">
+  </Target>
+
+  <Target Name="Test">
+    <!-- Execute the actual test -->
+    <Message Text="Test successful" Importance="High" />
+  </Target>
+
+  <Target Name="StaticAnalysis">
+    <Message Text="Analysis successful" Importance="High" />
+  </Target>
+
+
+  <!-- <Target Name="Display" DependsOnTargets="Display2" BeforeTargets="Build">  
+   <Message Text="Kablam $(TargetFramework) $(CustomProp)" Importance="High" />  
+  </Target>
+
+  <Target Name="Display2">  
+   <Message Text="Before" Importance="High" />  
+  </Target> -->
+
 </Project>
