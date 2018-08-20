@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
   <PropertyGroup>
     <TargetFramework>netcoreapp2.0</TargetFramework>
     <CustomProp>Tessan</CustomProp>
@@ -11,15 +11,14 @@
   </ItemGroup>
   
   <Target Name="CopyTestData" AfterTargets="Build">
-    <Copy SourceFiles="TestData.txt" DestinationFolder="$(OutputPath)"/>
+    <Copy SourceFiles="TestData.txt" DestinationFolder="$(OutputPath)" />
   </Target>
 
   <Target Name="BuildAll" DependsOnTargets="Clean;Build;Test;StaticAnalysis">
   </Target>
 
   <Target Name="Test">
-    <!-- Execute the actual test -->
-    <Message Text="Test successful" Importance="High" />
+    <Exec Command="dotnet test $(ProjectName).Tests" WorkingDirectory="..\" /> 
   </Target>
 
   <Target Name="StaticAnalysis">
